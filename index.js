@@ -11,15 +11,25 @@ const shoppingListInDB = ref(database, "shoppingList")
 
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
+const errorEl = document.getElementById("error-msg");
 const shoppingListEl = document.getElementById("shopping-list")
 
-addButtonEl.addEventListener("click", function() {
-    let inputValue = inputFieldEl.value
+addButtonEl.addEventListener("click", () => {
+    const inputValue = inputFieldEl.value;
+    const trimmedValue = inputValue.trim();
+    const isValid = /[a-zA-Z0-9]/.test(trimmedValue);
+
+    if (!isValid) {
+        errorEl.textContent = "Please enter your item.";
+        errorEl.classList.add("show");
+        return;
+    }
     
-    push(shoppingListInDB, inputValue)
-    
-    clearInputFieldEl()
-})
+    errorEl.textContent = "";
+    errorEl.classList.remove("show")
+    push(shoppingListInDB, trimmedValue);
+    clearInputFieldEl();
+});
 
 onValue(shoppingListInDB, function(snapshot) {
     if (snapshot.exists()) {
@@ -34,8 +44,11 @@ onValue(shoppingListInDB, function(snapshot) {
             
             appendItemToShoppingListEl(currentItem)
         }    
+    }  else {
+            shoppingListEl.innerHTML = "No items are here.....yet"
+        }
     }
-})
+)
 
 function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""

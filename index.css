@@ -4,6 +4,8 @@ html, body {
     background-color: #FCFEFB;
     font-family: 'Rubik', sans-serif;
     color: #432000;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .container {
@@ -16,8 +18,6 @@ html, body {
 img {
     width: 150px;
     margin: 0 auto;
-    -webkit-user-drag: none;
-    user-select: none;
 }
 
 input {
@@ -30,6 +30,21 @@ input {
     text-align: center;
     margin: 10px 0;
     font-family: 'Rubik', sans-serif;
+}
+
+#error-msg {
+    color: red;
+    font-size: 0.9em;
+    text-align: center;
+    max-height: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease, margin-bottom 0.2s ease;
+}
+
+#error-msg.show {
+    max-height: 100px;
+    margin-bottom: 8px;
 }
 
 button {
