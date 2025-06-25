@@ -12,9 +12,11 @@ const shoppingListInDB = ref(database, "shoppingList")
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
 const errorEl = document.getElementById("error-msg");
+let hasInteracted = false;
 const shoppingListEl = document.getElementById("shopping-list")
 
 addButtonEl.addEventListener("click", () => {
+    hasInteracted = true;
     const inputValue = inputFieldEl.value;
     const trimmedValue = inputValue.trim();
     const isValid = /[a-zA-Z0-9]/.test(trimmedValue);
@@ -24,7 +26,7 @@ addButtonEl.addEventListener("click", () => {
         errorEl.classList.add("show");
         return;
     }
-    
+
     errorEl.textContent = "";
     errorEl.classList.remove("show")
     push(shoppingListInDB, trimmedValue);
@@ -38,15 +40,16 @@ onValue(shoppingListInDB, function(snapshot) {
         clearShoppingListEl()
         
         for (let i = 0; i < itemsArray.length; i++) {
-            let currentItem = itemsArray[i]
-            let currentItemID = currentItem[0]
-            let currentItemValue = currentItem[1]
-            
+            let currentItem = itemsArray[i];
             appendItemToShoppingListEl(currentItem)
         }    
     }  else {
-            shoppingListEl.innerHTML = "No items are here.....yet"
+        if (hasInteracted) {
+        shoppingListEl.innerHTML = `<li style="color: gray; font-style: italic; background: none; box-shadow: none; cursor: default;">No items are here.....yet</li>`;
+        } else {
+        shoppingListEl.innerHTML = "";
         }
+    }
     }
 )
 
