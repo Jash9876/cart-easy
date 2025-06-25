@@ -20,10 +20,30 @@ img {
     margin: 0 auto;
 }
 
-#delete-all-icon:hover {
-  opacity: 1;
-  transform: scale(1.1);
-  transition: 0.2s;
+#delete-all-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background-image: url("assets/trash.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
+  z-index: 10;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+
+#delete-all-icon:active {
+  transform: scale(0.92);
+  opacity: 0.6;
 }
 
 
