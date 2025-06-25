@@ -20,6 +20,13 @@ img {
     margin: 0 auto;
 }
 
+#delete-all-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+
 input {
     background-color: #DCE1EB;
     padding: 15px;

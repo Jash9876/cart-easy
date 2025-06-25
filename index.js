@@ -8,6 +8,7 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const shoppingListInDB = ref(database, "shoppingList")
+const deleteAllIcon = document.getElementById("delete-all-icon");
 
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
@@ -52,6 +53,20 @@ onValue(shoppingListInDB, function(snapshot) {
     }
     }
 )
+
+deleteAllIcon.addEventListener("click", () => {
+  onValue(shoppingListInDB, (snapshot) => {
+    if (snapshot.exists()) {
+      remove(shoppingListInDB);
+    } else {
+      errorEl.textContent = "Add something to remove.";
+      setTimeout(() => {
+        errorEl.textContent = "";
+      }, 2000);
+    }
+  }, { onlyOnce: true });
+});
+
 
 function clearShoppingListEl() {
     shoppingListEl.innerHTML = ""
