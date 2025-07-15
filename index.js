@@ -7,7 +7,7 @@ const appSettings = {
 
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
-const shoppingListInDB = ref(database, "shoppingList")
+const shoppingListInDB = ref(database, `users/${user.uid}/shoppingList`);
 const deleteAllIcon = document.getElementById("delete-all-icon");
 
 const inputFieldEl = document.getElementById("input-field")
