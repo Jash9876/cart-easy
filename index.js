@@ -7,6 +7,11 @@ const appSettings = {
 
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
+let userId = localStorage.getItem("cartUserId");
+if (!userId) {
+  userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
+  localStorage.setItem("cartUserId", userId);
+}
 const shoppingListInDB = ref(database, `users/${user.uid}/shoppingList`);
 const deleteAllIcon = document.getElementById("delete-all-icon");
 
