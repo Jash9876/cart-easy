@@ -12,7 +12,8 @@ if (!userId) {
   userId = `user_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
   localStorage.setItem("cartUserId", userId);
 }
-const shoppingListInDB = ref(database, `users/${user.uid}/shoppingList`);
+
+const shoppingListInDB = ref(database, `users/${userId}/shoppingList`);
 const deleteAllIcon = document.getElementById("delete-all-icon");
 
 const inputFieldEl = document.getElementById("input-field")
